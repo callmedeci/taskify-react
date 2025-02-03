@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+.active {
+  @apply text-zinc-100 hover:text-zinc-50;
+}
+
+button {
+  @apply cursor-pointer;
+}
