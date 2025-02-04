@@ -6,20 +6,13 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import Task from '../features/tasks/Task';
 import TaskOperations from '../features/tasks/TaskOperations';
 import AddEditTask from '../features/tasks/AddEditTask';
-import { useUrl } from '../hooks/useUrl';
+import { useSortValues } from '../hooks/useSortValues';
 
 function Tasks() {
   const [tasks, setTasks] = useLocalStorage('tasks', []);
+  const [sortedTasks] = useSortValues(tasks);
+
   const [isOpen, setIsOpen] = useState(false);
-
-  const { readUrl } = useUrl('sortBy');
-  const sortBy = readUrl || 'date-desc';
-  const [filed, direction] = sortBy.split('-');
-  const modifier = direction === 'asc' ? 1 : -1;
-
-  const sortedTasks = tasks.sort(
-    (a, b) => a[filed].localeCompare(b[filed]) * modifier,
-  );
 
   function handleToggle() {
     setIsOpen((open) => !open);

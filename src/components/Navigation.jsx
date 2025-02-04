@@ -13,6 +13,10 @@ const navigation = [
     name: 'Tasks Reducer',
     to: 'tasks-reducer',
   },
+  {
+    name: 'Tasks Context',
+    to: 'tasks-context',
+  },
 ];
 
 function Navigation() {

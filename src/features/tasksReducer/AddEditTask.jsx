@@ -4,7 +4,7 @@ import Input from '../../components/Input';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 
-function AddEditTaskReducer({ dispatch, onClose, taskToEdit = null }) {
+function AddEditTask({ dispatch, onClose, taskToEdit = null }) {
   const [title, setTitle] = useState(taskToEdit?.title || '');
   const [status, setStatus] = useState(taskToEdit?.status || 'not-completed');
 
@@ -54,4 +54,4 @@ function AddEditTaskReducer({ dispatch, onClose, taskToEdit = null }) {
   );
 }
 
-export default AddEditTaskReducer;
+export default AddEditTask;

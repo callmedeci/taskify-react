@@ -12,9 +12,9 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import DeleteConfirmation from '../../components/DeleteConfirmation';
 
-import AddEditTaskReducer from './AddEditTaskReducer';
+import AddEditTask from './AddEditTask';
 
-function TaskReducer({ task, dispatch }) {
+function Task({ task, dispatch }) {
   return (
     <div className='flex h-full w-fit max-w-[30%] flex-col gap-2 rounded bg-zinc-700/70 p-5 shadow'>
       <div className='flex items-center gap-5 text-sm font-medium text-zinc-400'>
@@ -66,7 +66,7 @@ function TaskReducer({ task, dispatch }) {
           </Modal.Open>
 
           <Modal.Window id='edit'>
-            <AddEditTaskReducer dispatch={dispatch} taskToEdit={task} />
+            <AddEditTask dispatch={dispatch} taskToEdit={task} />
           </Modal.Window>
         </Modal>
       </div>
@@ -74,4 +74,4 @@ function TaskReducer({ task, dispatch }) {
   );
 }
 
-export default TaskReducer;
+export default Task;

@@ -2,28 +2,24 @@ import { useEffect, useReducer } from 'react';
 
 import Modal from '../components/Modal';
 
-import { useUrl } from '../hooks/useUrl';
+import { useSortValues } from '../hooks/useSortValues';
 
 import { reducer } from '../features/tasksReducer/reducer';
 import TaskOperations from '../features/tasks/TaskOperations';
-import TaskReducer from '../features/tasksReducer/TaskReducer';
-import AddEditTaskReducer from '../features/tasksReducer/AddEditTaskReducer';
+import AddEditTask from '../features/tasksReducer/AddEditTask';
+import Task from '../features/tasksReducer/Task';
 
-const initialState = {
-  tasks: JSON.parse(localStorage.getItem('tasks-redcuer')) || [],
+const initialState = function () {
+  const initialState = {
+    tasks: JSON.parse(localStorage.getItem('tasks-redcuer')) || [],
+  };
+
+  return initialState;
 };
 
-function TasksReducer() {
-  const [{ tasks }, dispatch] = useReducer(reducer, initialState);
-
-  const { readUrl } = useUrl('sortBy');
-  const sortBy = readUrl || 'date-desc';
-  const [filed, direction] = sortBy.split('-');
-  const modifier = direction === 'asc' ? 1 : -1;
-
-  const sortedTasks = tasks.sort(
-    (a, b) => a[filed].localeCompare(b[filed]) * modifier,
-  );
+function TasksReducerPage() {
+  const [{ tasks }, dispatch] = useReducer(reducer, initialState());
+  const [sortedTasks] = useSortValues(tasks);
 
   useEffect(
     function () {
@@ -45,7 +41,7 @@ function TasksReducer() {
           </Modal.Open>
 
           <Modal.Window id='add'>
-            <AddEditTaskReducer dispatch={dispatch} />
+            <AddEditTask dispatch={dispatch} />
           </Modal.Window>
         </Modal>
       </div>
@@ -53,7 +49,7 @@ function TasksReducer() {
       {tasks.length !== 0 && (
         <div className='mt-8 flex flex-wrap gap-10'>
           {sortedTasks.map((task) => (
-            <TaskReducer dispatch={dispatch} task={task} key={task.id} />
+            <Task dispatch={dispatch} task={task} key={task.id} />
           ))}
         </div>
       )}
@@ -61,4 +57,4 @@ function TasksReducer() {
   );
 }
 
-export default TasksReducer;
+export default TasksReducerPage;

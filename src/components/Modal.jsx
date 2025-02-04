@@ -3,6 +3,9 @@ import { XMarkIcon } from '@heroicons/react/16/solid';
 import { createPortal } from 'react-dom';
 
 import Overlay from './Overlay';
+import { useOutSideClick } from '../hooks/useOutSideClick';
+import useKey from '../hooks/useKey';
+import useShortcutHandler from '../hooks/useShortcutHandler';
 
 const ModalContext = createContext();
 
@@ -15,14 +18,6 @@ function CloseButton({ onClick }) {
     >
       <XMarkIcon />
     </button>
-  );
-}
-
-function Container({ children }) {
-  return (
-    <div className='relative flex h-fit w-fit rounded bg-zinc-800 p-5 text-zinc-200 shadow'>
-      {children}
-    </div>
   );
 }
 
@@ -58,17 +53,25 @@ function Open({ children, id }) {
 }
 
 function Window({ children, id }) {
-  const { modalId, close } = useModal();
+  const { modalId, close, open } = useModal();
+
+  const ref = useOutSideClick(close);
+
+  useKey(close, 'Escape');
+  useShortcutHandler([78, 84], () => open('add'));
 
   if (modalId !== id) return null;
 
   return createPortal(
     <Overlay>
-      <Container>
+      <div
+        ref={ref}
+        className='relative flex h-fit w-fit rounded bg-zinc-800 p-5 text-zinc-200 shadow'
+      >
         <CloseButton onClick={close} />
 
         {cloneElement(children, { onClose: close })}
-      </Container>
+      </div>
     </Overlay>,
     document.body,
   );
