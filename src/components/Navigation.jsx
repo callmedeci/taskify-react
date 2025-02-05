@@ -17,6 +17,10 @@ const navigation = [
     name: 'Tasks Context',
     to: 'tasks-context',
   },
+  {
+    name: 'Tasks ToolKit',
+    to: 'tasks-toolkit',
+  },
 ];
 
 function Navigation() {

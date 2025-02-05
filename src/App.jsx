@@ -1,16 +1,19 @@
 import { lazy } from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
 import { Toaster } from 'react-hot-toast';
 
 import Layout from './components/Layout';
 import TasksProvider from './features/tasksContext/TasksContext';
+import toolKitStore from './features/tasksRTK/store';
 
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 const Home = lazy(() => import('./pages/Home'));
 const Tasks = lazy(() => import('./pages/Tasks'));
 const TasksReducerPage = lazy(() => import('./pages/TasksReducerPage'));
 const TasksContextPage = lazy(() => import('./pages/TasksContextPage'));
+const TasksToolKitPage = lazy(() => import('./pages/TasksToolKitPage'));
 
 function App() {
   return (
@@ -46,6 +49,15 @@ function App() {
               <TasksProvider>
                 <TasksContextPage />
               </TasksProvider>
+            }
+          />
+
+          <Route
+            path='tasks-toolkit'
+            element={
+              <Provider store={toolKitStore}>
+                <TasksToolKitPage />
+              </Provider>
             }
           />
 
