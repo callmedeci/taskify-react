@@ -4,6 +4,7 @@ import Input from '../../components/Input';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 
+//Reducer Hook
 function AddEditTask({ dispatch, onClose, taskToEdit = null }) {
   const [title, setTitle] = useState(taskToEdit?.title || '');
   const [status, setStatus] = useState(taskToEdit?.status || 'not-completed');
@@ -19,7 +20,7 @@ function AddEditTask({ dispatch, onClose, taskToEdit = null }) {
       title,
       status,
       id: !isEditing ? Date.now() : taskToEdit.id,
-      date: !isEditing ? new Date().toISOString() : taskToEdit.date,
+      created_at: !isEditing ? new Date().toISOString() : taskToEdit.date,
     };
 
     if (!isEditing) dispatch({ type: 'tasks/add', payload: newTask });

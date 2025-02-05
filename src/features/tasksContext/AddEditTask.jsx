@@ -6,6 +6,7 @@ import Input from '../../components/Input';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 
+//ContextAPI + Reducer Hook
 function AddEditTask({ onClose, taskToEdit = null }) {
   const { addTask, editTask } = useTasks();
 
@@ -23,7 +24,7 @@ function AddEditTask({ onClose, taskToEdit = null }) {
       title,
       status,
       id: !isEditing ? Date.now() : taskToEdit.id,
-      date: !isEditing ? new Date().toISOString() : taskToEdit.date,
+      created_at: !isEditing ? new Date().toISOString() : taskToEdit.date,
     };
 
     if (!isEditing) addTask(newTask);

@@ -15,6 +15,7 @@ import DeleteConfirmation from '../../components/DeleteConfirmation';
 import { useTasks } from './TasksContext';
 import AddEditTask from './AddEditTask';
 
+//ContextAPI + Reducer Hook
 function Task({ task }) {
   const { deleteTask } = useTasks();
 
@@ -24,7 +25,7 @@ function Task({ task }) {
         <p>{task.title.length} characters</p>
         <time className='flex items-center gap-1'>
           <CalendarDaysIcon className='size-6' />
-          <span>{format(task.date, 'MMM dd yyyy')}</span>
+          <span>{format(task.created_at, 'MMM dd yyyy')}</span>
         </time>
       </div>
       <h4 className='text-lg'>{task.title}</h4>

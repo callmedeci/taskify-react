@@ -3,12 +3,10 @@ import { reducer } from '../tasksReducer/reducer';
 
 const TasksContext = createContext();
 
-const initialState = function () {
-  const initialState = {
+const initialState = () => {
+  return {
     tasks: JSON.parse(localStorage.getItem('tasks-context')) || [],
   };
-
-  return initialState;
 };
 
 function TasksProvider({ children }) {

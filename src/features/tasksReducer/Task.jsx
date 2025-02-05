@@ -14,6 +14,7 @@ import DeleteConfirmation from '../../components/DeleteConfirmation';
 
 import AddEditTask from './AddEditTask';
 
+//Reducer Hook
 function Task({ task, dispatch }) {
   return (
     <div className='flex h-full w-fit max-w-[30%] flex-col gap-2 rounded bg-zinc-700/70 p-5 shadow'>
@@ -21,7 +22,7 @@ function Task({ task, dispatch }) {
         <p>{task.title.length} characters</p>
         <time className='flex items-center gap-1'>
           <CalendarDaysIcon className='size-6' />
-          <span>{format(task.date, 'MMM dd yyyy')}</span>
+          <span>{format(task.created_at, 'MMM dd yyyy')}</span>
         </time>
       </div>
       <h4 className='text-lg'>{task.title}</h4>

@@ -13,6 +13,7 @@ import AddEditTask from './AddEditTask';
 import Overlay from '../../components/Overlay';
 import Button from '../../components/Button';
 
+//useState + useEffect hook
 function Task({ task, onDelete, onEdit }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +27,7 @@ function Task({ task, onDelete, onEdit }) {
         <p>{task.title.length} characters</p>
         <time className='flex items-center gap-1'>
           <CalendarDaysIcon className='size-6' />
-          <span>{format(task.date, 'MMM dd yyyy')}</span>
+          <span>{format(task.created_at, 'MMM dd yyyy')}</span>
         </time>
       </div>
       <h4 className='text-lg'>{task.title}</h4>
